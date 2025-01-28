@@ -1,3 +1,4 @@
 PyYAML
 mistralai
 streamlit
+langchain
