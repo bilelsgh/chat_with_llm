@@ -5,12 +5,12 @@ sys.path.append("..")
 import streamlit as st
 from utils import display_chat_messages
 
-from clients.llmclient import available_models
+from clients.llmclient import AVAILABLE_MODELS
 from config.config import key
 from helpers.utils import get_llm_client, get_model_type_from_input
 
 # Model choice
-client_choice = st.selectbox("Chose your model", list(available_models.keys()))
+client_choice = st.selectbox("Chose your model", list(AVAILABLE_MODELS.keys()))
 model_type = get_model_type_from_input(client_choice)
 
 # Init the client

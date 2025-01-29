@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from enum import Enum
+from dataclasses import dataclass
 
 from langchain.chains.conversation.base import ConversationChain
 from langchain.memory import ConversationBufferMemory
@@ -46,24 +46,15 @@ class LLMClient(ABC):
         )
 
 
-class AvailableModels(Enum):
-    DEEPSEEK_R1 = ("DEEPSEEK", "deepseek-chat")
-    MISTRAL_LARGE = ("MISTRAL", "mistral-large-latest")
-
-    def __init__(self, model_family: str, name: str):
-        self._model_family = model_family
-        self._name = name
-
-    @property
-    def model_family(self):
-        return self._model_family
-
-    @property
-    def name(self):
-        return self._name
+@dataclass
+class AvailableModel:
+    name: str
+    model_family: str
 
 
-available_models = {
-    "deepseek-r1": AvailableModels.DEEPSEEK_R1,
-    "mistral-large": AvailableModels.MISTRAL_LARGE,
+AVAILABLE_MODELS = {
+    "deepseek-r1": AvailableModel(model_family="DEEPSEEK_R1", name="deepseek-chat"),
+    "mistral-large": AvailableModel(
+        model_family="MISTRAL", name="mistral-large-latest"
+    ),
 }

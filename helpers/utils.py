@@ -2,11 +2,11 @@
 Utils functions for the whole project
 """
 from clients.deep_seek import DeepSeekClient
-from clients.llmclient import AvailableModels, LLMClient, available_models
+from clients.llmclient import AVAILABLE_MODELS, AvailableModel, LLMClient
 from clients.mistral import MistralClient
 
 
-def get_llm_client(model: AvailableModels, key: str) -> LLMClient:
+def get_llm_client(model: AvailableModel, key: str) -> LLMClient:
     """
     Get the LLM client to start chatting
 
@@ -25,7 +25,7 @@ def get_llm_client(model: AvailableModels, key: str) -> LLMClient:
     return clients[model.model_family](**args_)
 
 
-def get_model_type_from_input(user_input: str) -> AvailableModels:
+def get_model_type_from_input(user_input: str) -> AvailableModel:
     """
     Get LLM client from user input
 
@@ -34,6 +34,6 @@ def get_model_type_from_input(user_input: str) -> AvailableModels:
     """
 
     try:
-        return available_models[user_input]
+        return AVAILABLE_MODELS[user_input]
     except KeyError:
         raise ValueError(f"Invalid client: {user_input}")
